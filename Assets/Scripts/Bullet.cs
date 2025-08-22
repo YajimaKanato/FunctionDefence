@@ -4,7 +4,7 @@ public class Bullet : MonoBehaviour
 {
     Vector3 _orbit;
 
-    float _speed;
+    float _speed = 1;
     float _power;
 
     float _delta = 0;
@@ -19,13 +19,29 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         _delta += Time.deltaTime;
-
-        transform.position = SetOrbit(_delta, FunctionCalc.SecondDimensionFunc(_delta, c: 0));
+        /*
+        SetSpeed(FunctionCalc.FirstDimensionFunc(_delta, b: 0));
+        SetOrbit(FunctionCalc.CosFunc(_delta * 100 * _speed, 2), FunctionCalc.SinFunc(_delta * 100, 2));
+        */
+        transform.position = _orbit;
     }
 
-    Vector3 SetOrbit(float x, float y)
+    /// <summary>
+    /// 軌道を決めるメソッド
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    void SetOrbit(float x, float y)
     {
         _orbit = new Vector3(x, y, 0);
-        return _orbit;
+    }
+
+    /// <summary>
+    /// 速度を決めるメソッド
+    /// </summary>
+    /// <param name="func"></param>
+    void SetSpeed(float func)
+    {
+        _speed = func;
     }
 }
